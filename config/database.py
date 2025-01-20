@@ -44,5 +44,17 @@ class DatabaseConnection:
 
     def execute_query(self, query, params = None):
         """ EXECUTA UMA CONSULTA SQL """
-        if not self.connection
-        
+        if not self.connection or not self.connection.is_connected():
+            print("Sem conexão ativa com o banco de dados")
+
+        try:
+            cursor = self.connection.cursor(dictionary = True)
+            cursor.execute(query, params)
+            results = cursor.fetchAll()
+            return results
+
+        except Error as e:
+            print(f"Erro ao buscar resultados: {e}")
+            return None
+        finally: 
+            cursor.close();
