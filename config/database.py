@@ -45,3 +45,4 @@ class DatabaseConnection:
     def execute_query(self, query, params = None):
         """ EXECUTA UMA CONSULTA SQL """
         if not self.connection
+        
