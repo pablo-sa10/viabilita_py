@@ -1,7 +1,8 @@
-from database.config import create_connection
+from config.database import connect
 
 def test_connection():
-    connection = create_connection()
+    db = DatabaseConnection()
+    connection = db.connect()  # Você usa o método connect() da instância de DatabaseConnection
     if connection:
         print("Teste de conexão bem-sucedido!")
         connection.close()

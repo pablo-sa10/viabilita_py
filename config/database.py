@@ -1,5 +1,5 @@
 import mysql.connector
-from mysql.connector import error
+from mysql.connector import Error
 from dotenv import load_dotenv
 import os
 
@@ -21,11 +21,11 @@ class DatabaseConnection:
         """ ESTABELECE A CONEXAO COM O BANCO DE DADOS """
         try:
             self.connection = mysql.connector.connect(
-                host = self.host,
-                port = self.port,
-                user = self.user,
-                password = self.password,
-                database = self.database,
+                host=self.host,
+                port=self.port,
+                user=self.user,
+                password=self.password,
+                database=self.database,
             )
 
             if self.connection.is_connected():
@@ -37,24 +37,23 @@ class DatabaseConnection:
 
     def disconnect(self):
         """ FECHA A CONEXAO COM O BANCO DE DADOS """
-        if not self.connection or not self.connection.is_connected():
-            print("Sem conexao ativa com o banco de dados.")
+        if self.connection and self.connection.is_connected():
             self.connection.close()
-            print("Conexao com o banco de dados")
+            print("Conexão com o banco de dados encerrada.")
 
-    def execute_query(self, query, params = None):
+    def execute_query(self, query, params=None):
         """ EXECUTA UMA CONSULTA SQL """
         if not self.connection or not self.connection.is_connected():
-            print("Sem conexão ativa com o banco de dados")
+            print("Sem conexão ativa com o banco de dados.")
 
         try:
-            cursor = self.connection.cursor(dictionary = True)
+            cursor = self.connection.cursor(dictionary=True)
             cursor.execute(query, params)
-            results = cursor.fetchAll()
+            results = cursor.fetchall()
             return results
 
         except Error as e:
             print(f"Erro ao buscar resultados: {e}")
             return None
         finally: 
-            cursor.close();
+            cursor.close()
