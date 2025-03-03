@@ -35,25 +35,4 @@ class DatabaseConnection:
             print(f"Erro ao conectar ao banco de dados: {e}")
             self.connection = None
 
-    def disconnect(self):
-        """ FECHA A CONEXAO COM O BANCO DE DADOS """
-        if self.connection and self.connection.is_connected():
-            self.connection.close()
-            print("Conexão com o banco de dados encerrada.")
-
-    def execute_query(self, query, params=None):
-        """ EXECUTA UMA CONSULTA SQL """
-        if not self.connection or not self.connection.is_connected():
-            print("Sem conexão ativa com o banco de dados.")
-
-        try:
-            cursor = self.connection.cursor(dictionary=True)
-            cursor.execute(query, params)
-            results = cursor.fetchall()
-            return results
-
-        except Error as e:
-            print(f"Erro ao buscar resultados: {e}")
-            return None
-        finally: 
-            cursor.close()
+    
