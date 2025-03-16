@@ -1,5 +1,4 @@
-from config.database import DatabaseConnection  # Importe a classe
+from controllers.viabilitaController import ViabilitieController
 
-# Criando a conexão
-db = DatabaseConnection()
-db.connect()
+controller = ViabilitieController()
+controller.createViabilitie()

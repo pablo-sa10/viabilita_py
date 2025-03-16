@@ -1,7 +1,7 @@
 from config.database import DatabaseConnection  # Importe a classe
 from mysql.connector import Error
 
-class Viabilidade:
+class Viabilitie:
 
     def latestViabilities():
 
